@@ -1,0 +1,18 @@
+@startuml Основное приложение - Context Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title Тёплый дом - Контейнеры (Монолит)
+
+Person(user, "Пользователь", "Сотрудник или клиент")
+
+System(app, "'Умный дом'", "Управление датчиками","Go")
+System(postgres, "PostgreSQL", "База данных датчиков")
+
+System(temperature_api, "Temperature API", "Микросервис датчиков температуры", "Go")
+
+' Связи
+Rel(user, app, "Просматривает показатели, управляет датчиками", "HTTPS")
+Rel(app, temperature_api, "Запрашивает показатели датчиков температуры", "REST/JSON")
+Rel(app, postgres, "CRUD запросы", "Read/Write")
+
+@enduml

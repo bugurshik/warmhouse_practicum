@@ -1,0 +1,15 @@
+@startuml Temperature API - Context Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title Temperature API - Контекст
+
+System_Boundary(api_system, "Temperature API") {
+    System(api, "Temperature API", "Датчики температуры", "", "Go")
+}
+
+System_Ext(app, "Приложение умного дома")
+
+' Связи
+Rel(app, api, "Запрос температуры по локации/комнате", "REST/JSON")
+
+@enduml

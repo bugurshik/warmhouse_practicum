@@ -1,0 +1,15 @@
+@startuml Основное приложение - Context Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title Тёплый Дом - Контекст (Монолит)
+
+Person(user, "Пользователь", "")
+
+System(app, "Приложение 'Тёплый дом'", "Позволяет управлять умными устройствами и просматривать их показатели", "", "Go")
+System_Ext(iot, "Temperature API", " Просматривать текущие показатели")
+
+' Связи
+Rel(user, app, "Просматривает показатели, управляет датчиками")
+Rel(app, iot, "Получить текущие показания")
+
+@enduml
