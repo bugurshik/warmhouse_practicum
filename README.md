@@ -61,7 +61,7 @@ Bounded Contexts:
 
 **Диаграмма контейнеров (Containers)**
 
-[Тёплый дом - контейнеры](Monolith Containers Diagram.png)
+[Тёплый дом - контейнеры](./Monolith Containers Diagram.png)
 
 **Диаграмма компонентов (Components)**
 
