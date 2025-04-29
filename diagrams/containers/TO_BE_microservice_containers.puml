@@ -1,0 +1,50 @@
+@startuml Temperature API - Context Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Теплый дом - Контейнеры
+
+Person(user, "Пользователь", "(WEB/Mobile/App)")
+System(api_system, "Теплый дом") {
+    Container(gateway, "API Gateway", "Единая точка входа для всех API.\nМаршрутизация запросов к нужным сервисам.\nЛимиты запросов, кеширование.")
+    
+    Container(temperature, "Temperature API", "Датчики температуры", "(API для управления светом, видео, открыванием/закрыванием дверей будут иметь идентичные сявзи, не добавлял их, чтобы не перегружать диаграму)", "Go")
+
+    Container(devises, "Device Management Service", "Управление устройствами", "Регистрация новых устройств.\nХранение метаданных.\nУправление состоянием.")
+    Container(devises_db, "Device Management Database","PostgreSQL")
+
+    Container(telemetry, "Телеметрия устройств", "Сбор данных с датчиков и хранение.\nВизуализация (графики, уведомления).")
+    Container(telemetry_db, "База данных телеметрии", "InfluxDB")
+    
+    Container(automation, "Automation Service", "Сервис автоматизации","Создание сценариев и тригеров. При их активации запускает события")
+    Container(automation_db, "Automation Database","PostgreSQL")
+
+    Container(devise_gateway, "Device Gateway", "Единая точка входа для взаимодействия с физическими устройствами")
+}
+
+System_Ext(temperature_iot, "Устройства отопления","")
+System_Ext(video_iot, "Устройства видео наблюдения","")
+System_Ext(lighting_iot, "Устройства освещения","")
+System_Ext(automatic_gates_iot, "Автоматические ворота","")
+
+' Связи
+
+Rel(user, gateway, "Получает телеметрию и управляет устройствами")
+
+Rel(gateway, devises, "")
+Rel(gateway, automation, "")
+Rel(gateway, temperature, "")
+Rel(gateway, telemetry, "")
+
+Rel(telemetry, temperature, "Получение новых данных с устройств")
+Rel(devises, devises_db, "Read/write")
+Rel(automation, automation_db, "Read/write")
+Rel(telemetry, telemetry_db, "Read/write")
+Rel(temperature, devise_gateway, "")
+
+
+Rel(devise_gateway, temperature_iot, "")
+Rel(devise_gateway, video_iot, "")
+Rel(devise_gateway, lighting_iot, "")
+Rel(devise_gateway, automatic_gates_iot, "")
+
+@enduml

@@ -1,0 +1,18 @@
+@startuml Основное приложение - Context Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title Тёплый Дом - Контекст (Монолит)
+
+Person(user, "Пользователь", "")
+Person(customer, "Сотрудник")
+
+System(app, "Тёплый дом", "Позволяет управлять отоплением в доме и проверять температуру", "", "Go")
+
+System_Ext(heating, "Система отопления")
+
+' Связи
+Rel(user, app, "Смотрит температуру, управляет датчиками")
+Rel(customer, app, "Добавляет новые устройства при установке")
+Rel(app, heating, "Получать и устанавливать целевую температуру")
+
+@enduml
