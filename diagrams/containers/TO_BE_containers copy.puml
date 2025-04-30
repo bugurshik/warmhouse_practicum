@@ -2,10 +2,12 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 title Теплый дом - Контейнеры
-skinparam linetype ortho
 skinparam Arrow  {
   FontColor #ffffff
 }
+
+skinparam nodesep 50
+skinparam ranksep 100
 
 Person(user, "Пользователь", "(WEB/Mobile/App)")
 System(api_system, "Теплый дом") {
@@ -22,12 +24,15 @@ System(api_system, "Теплый дом") {
 
     Container(devises, "Device Management Service", "Управление устройствами", "Регистрация новых устройств.\nХранение метаданных.\nУправление состоянием.")
     Container(devises_db, "Device Management Database","PostgreSQL")
+    Lay_D(devises, devises_db)
 
     Container(telemetry, "Телеметрия устройств", "Сбор данных с датчиков и хранение.\nВизуализация (графики, уведомления).")
     Container(telemetry_db, "База данных телеметрии", "InfluxDB")
+    Lay_D(telemetry, telemetry_db)
 
     Container(automation, "Automation Service", "Сервис автоматизации","Создание сценариев и тригеров. При их активации запускает события")
     Container(automation_db, "Automation Database", "PostgreSQL")
+    Lay_D(automation, automation_db)
 
     Container(devise_gateway, "Device Gateway", "Единая точка входа для взаимодействия с физическими устройствами")
 }
@@ -53,17 +58,13 @@ Rel(devises, devises_db, "Read/Write")
 Rel(automation, automation_db, "Read/Write")
 Rel(telemetry, telemetry_db, "Read/Write")
 
-
 Rel(iot_adapters_group, telemetry, "Отправка (Push) телеметрии")
-Rel(iot_adapters_group, devise_gateway, "")
+Rel_D(iot_adapters_group, devise_gateway, "")
 
 Rel(devise_gateway, temperature_iot, "")
 Rel(devise_gateway, video_iot, "")
 Rel(devise_gateway, lighting_iot, "")
 Rel(devise_gateway, other_iot, "")
 Rel(devise_gateway, automatic_gates_iot, "")
-
-Lay_R(telemetry, devises)
-Lay_R(devises, automation)
 
 @enduml
