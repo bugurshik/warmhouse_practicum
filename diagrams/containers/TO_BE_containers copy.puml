@@ -1,0 +1,69 @@
+@startuml Temperature API - Context Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Теплый дом - Контейнеры
+skinparam linetype ortho
+skinparam Arrow  {
+  FontColor #ffffff
+}
+
+Person(user, "Пользователь", "(WEB/Mobile/App)")
+System(api_system, "Теплый дом") {
+    Container(gateway, "API Gateway", "Единая точка входа для всех API.\nМаршрутизация запросов к нужным сервисам.\nЛимиты запросов, кеширование.")
+    
+    Boundary(iot_adapters_group, "API Адаптеры к умным устройствам", "Логическая группа API"){
+
+        Container(temperature, "Temperature API", "Датчики температуры", "(API для управления светом, видео, открыванием/закрыванием дверей будут иметь идентичные сявзи, не добавлял их, чтобы не перегружать диаграму)", "Go")
+        Container(lighting, "Lighting API", "Свет")
+        Container(video, "Video API", "Видео стриминг")
+        Container(gates, "Gates API", "Двери")
+        Container(others, "Others API", "И другие еще не известные")
+    }
+
+    Container(devises, "Device Management Service", "Управление устройствами", "Регистрация новых устройств.\nХранение метаданных.\nУправление состоянием.")
+    Container(devises_db, "Device Management Database","PostgreSQL")
+
+    Container(telemetry, "Телеметрия устройств", "Сбор данных с датчиков и хранение.\nВизуализация (графики, уведомления).")
+    Container(telemetry_db, "База данных телеметрии", "InfluxDB")
+
+    Container(automation, "Automation Service", "Сервис автоматизации","Создание сценариев и тригеров. При их активации запускает события")
+    Container(automation_db, "Automation Database", "PostgreSQL")
+
+    Container(devise_gateway, "Device Gateway", "Единая точка входа для взаимодействия с физическими устройствами")
+}
+
+System_Ext(temperature_iot, "Устройства отопления","")
+System_Ext(video_iot, "Устройства видео наблюдения","")
+System_Ext(lighting_iot, "Устройства освещения","")
+System_Ext(automatic_gates_iot, "Автоматические ворота","")
+System_Ext(other_iot, "И другие устройства...","")
+
+' Связи
+
+Rel(user, gateway, "Получает телеметрию и управляет устройствами")
+
+Rel(gateway, iot_adapters_group, "Прямой запрос пользователя или команда", "JSON/HTTPS")
+Rel(devises, iot_adapters_group, "Включить/выключить устройство")
+
+Rel(gateway, devises, "")
+Rel(gateway, automation, "Создать сценарий или триггер", "JSON/HTTPS")
+Rel(gateway, telemetry, "Получить аггрегированые или исторические значения")
+
+Rel(devises, devises_db, "Read/Write")
+Rel(automation, automation_db, "Read/Write")
+Rel(telemetry, telemetry_db, "Read/Write")
+
+
+Rel(iot_adapters_group, telemetry, "Отправка (Push) телеметрии")
+Rel(iot_adapters_group, devise_gateway, "")
+
+Rel(devise_gateway, temperature_iot, "")
+Rel(devise_gateway, video_iot, "")
+Rel(devise_gateway, lighting_iot, "")
+Rel(devise_gateway, other_iot, "")
+Rel(devise_gateway, automatic_gates_iot, "")
+
+Lay_R(telemetry, devises)
+Lay_R(devises, automation)
+
+@enduml

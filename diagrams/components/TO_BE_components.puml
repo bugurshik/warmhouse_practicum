@@ -1,0 +1,34 @@
+@startuml Telemetry - components diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title API Телеметрии - компоненты
+
+Person(user, "Пользователь", "(WEB/Mobile/App)")
+
+Container(telemetry, "Телеметрия") {
+    Component(handlers, "HTTP Handlers", "")
+    Component(mqtt_handler, "MQTT Handler", "Подписка на топики устройств")
+
+    Component(telemetry_service, "Telemetry service", "Сервис получения и агрегации данных")
+    
+    Component(ingest_service, "Ingest service", "Сервис приёма и валидации данных")
+
+    Component(db_component, "Database component", "Репозиторий")
+}
+
+ContainerDb(telemetry_db, "База данных телеметрии", "InfluxDB")
+
+System_Ext(temperature, "IOT Устройства")
+
+' Связи
+
+Rel(user, handlers,"Получение телеметрии усройства/устройств", "JSON/HTTPS")
+Rel(handlers, telemetry_service,"")
+Rel(telemetry_service, db_component, "Read")
+
+Rel(mqtt_handler, ingest_service, "Запись и  устройств")
+Rel(ingest_service, db_component, "Write")
+
+Rel(db_component, telemetry_db, "")
+
+@enduml
