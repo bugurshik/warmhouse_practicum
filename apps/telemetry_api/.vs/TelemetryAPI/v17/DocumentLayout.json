@@ -1,0 +1,73 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|c:\\users\\sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\telemetryapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|solutionrelative:telemetryapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|c:\\users\\sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\telemetryapi\\sensorupdated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|solutionrelative:telemetryapi\\sensorupdated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|c:\\users\\sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\telemetryapi\\telemetryconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|solutionrelative:telemetryapi\\telemetryconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TelemetryConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\TelemetryConsumer.cs",
+              "RelativeDocumentMoniker": "TelemetryAPI\\TelemetryConsumer.cs",
+              "ToolTip": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\TelemetryConsumer.cs",
+              "RelativeToolTip": "TelemetryAPI\\TelemetryConsumer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T22:10:31.402Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SensorUpdated.cs",
+              "DocumentMoniker": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\SensorUpdated.cs",
+              "RelativeDocumentMoniker": "TelemetryAPI\\SensorUpdated.cs",
+              "ToolTip": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\SensorUpdated.cs",
+              "RelativeToolTip": "TelemetryAPI\\SensorUpdated.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T22:10:30.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\Program.cs",
+              "RelativeDocumentMoniker": "TelemetryAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\Program.cs",
+              "RelativeToolTip": "TelemetryAPI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T21:04:14.629Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
