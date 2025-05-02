@@ -1,0 +1,25 @@
+info:
+  contact: {}
+paths:
+  /example:
+    get:
+      consumes:
+      - application/json
+      description: Получить температуру по локации.
+      parameters:
+      - description: Локация
+        in: query
+        name: location
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Возвращает текущие показания сенсора
+          schema:
+            type: string
+      summary: GetTemperatureByLocation
+      tags:
+      - Temperature
+swagger: "2.0"

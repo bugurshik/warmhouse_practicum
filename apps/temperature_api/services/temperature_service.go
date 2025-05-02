@@ -15,8 +15,8 @@ func NewTemperatureService() *TemperatureService {
 	return &TemperatureService{}
 }
 
-// GetTemperature temperature data for a specific location
-func (s *TemperatureService) GetTemperature(location string) (*models.Temperature, error) {
+// GetTemperatureByLocation temperature data for a specific location
+func (s *TemperatureService) GetTemperatureByLocation(location string) (*models.Temperature, error) {
 
 	var temperatureResp = generateRandomTemperature(location)
 	return &temperatureResp, nil

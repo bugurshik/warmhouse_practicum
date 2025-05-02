@@ -29,6 +29,14 @@ func (h *TemperatureHandler) RegisterRoutes(router *gin.RouterGroup) {
 	}
 }
 
+// @Summary GetTemperatureByLocation
+// @Description Получить температуру по локации.
+// @Tags Temperature
+// @Accept  json
+// @Produce  json
+// @Param   location      query    string  true  "Локация"
+// @Success 200 {string} string "Возвращает текущие показания сенсора"
+// @Router /example [get]
 // GetTemperatureByLocation handles GET /api/v1/sensors/temperature/:location
 func (h *TemperatureHandler) GetTemperatureByLocation(c *gin.Context) {
 	location := c.Query("location")
@@ -38,7 +46,7 @@ func (h *TemperatureHandler) GetTemperatureByLocation(c *gin.Context) {
 	}
 
 	// Fetch temperature data from the external API
-	tempData, err := h.TemperatureService.GetTemperature(location)
+	tempData, err := h.TemperatureService.GetTemperatureByLocation(location)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": fmt.Sprintf("Failed to fetch temperature data: %v", err),

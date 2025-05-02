@@ -1,0 +1,27 @@
+@startuml Device Management - components diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Device Management Service - компоненты
+
+Person(user, "Пользователь", "(WEB/Mobile/App)")
+Container(gateway, "API Gateway")
+
+Container(manage, "Device Management Service") {
+    Component(handlers, "HTTP Handlers", "REST", "Приём входящих HTTP-запросов")
+    Component(manage_service, "Device Manager service", "Сервис управления устройствами")
+    Component(db_component, "Database component", "Репозиторий")
+}
+
+ContainerDb(manage_db, "База данных устройств", "PostgreSQL")
+
+' Связи
+
+Rel(user, gateway, "")
+
+Rel(gateway, handlers, "Добавление/удаление устройств, переключение устройств", "JSON/HTTPS")
+Rel(handlers, manage_service, "")
+Rel(manage_service, db_component, "")
+
+Rel(db_component, manage_db, "Read/Write")
+
+@enduml

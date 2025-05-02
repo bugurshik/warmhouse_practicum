@@ -12,6 +12,8 @@ import (
 	"temperature/handlers"
 	"temperature/services"
 
+	_ "temperature/docs"
+
 	"github.com/gin-gonic/gin"
 )
 

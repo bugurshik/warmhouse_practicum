@@ -5,8 +5,16 @@ title API Телеметрии - компоненты
 
 Person(user, "Пользователь", "(WEB/Mobile/App)")
 
+Boundary(bound, "API Адаптеры к умным устройствам", "логическая группа API"){
+    System(temperature, "Temperature API", "Система отопления")
+    System(lighting, "Lighting API", "Система управления освещением")
+    System(video, "Video API", "Система видеонаблюдения стриминг")
+    System(gates, "Gates API", "Система управления дверьми")
+    System(others, "Others API", "И другие еще не известные")
+}
+
 Container(telemetry, "Телеметрия") {
-    Component(handlers, "HTTP Handlers", "")
+    Component(handlers, "HTTP Handlers", "REST", "Приём входящих HTTP-запросов")
     Component(mqtt_handler, "MQTT Handler", "Подписка на топики устройств")
 
     Component(telemetry_service, "Telemetry service", "Сервис получения и агрегации данных")
@@ -16,17 +24,17 @@ Container(telemetry, "Телеметрия") {
     Component(db_component, "Database component", "Репозиторий")
 }
 
-ContainerDb(telemetry_db, "База данных телеметрии", "InfluxDB")
-
-System_Ext(temperature, "IOT Устройства")
+ContainerDb(telemetry_db, "База данных телеметрии", "SQL/Timeseries")
 
 ' Связи
+
+Rel(bound, mqtt_handler, "Новые данные телеметрии")
 
 Rel(user, handlers,"Получение телеметрии усройства/устройств", "JSON/HTTPS")
 Rel(handlers, telemetry_service,"")
 Rel(telemetry_service, db_component, "Read")
 
-Rel(mqtt_handler, ingest_service, "Запись и  устройств")
+Rel(mqtt_handler, ingest_service, "")
 Rel(ingest_service, db_component, "Write")
 
 Rel(db_component, telemetry_db, "")

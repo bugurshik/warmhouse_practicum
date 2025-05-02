@@ -2,49 +2,68 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 title Теплый дом - Контейнеры
+skinparam Arrow  {
+  FontColor #ffffff
+}
 
 Person(user, "Пользователь", "(WEB/Mobile/App)")
 System(api_system, "Теплый дом") {
     Container(gateway, "API Gateway", "Единая точка входа для всех API.\nМаршрутизация запросов к нужным сервисам.\nЛимиты запросов, кеширование.")
     
-    Container(temperature, "Temperature API", "Датчики температуры", "(API для управления светом, видео, открыванием/закрыванием дверей будут иметь идентичные сявзи, не добавлял их, чтобы не перегружать диаграму)", "Go")
+    Boundary(iot_adapters_group, "API Адаптеры к умным устройствам", "Логическая группа API"){
+      Container(temperature, "Temperature API", "", "Адаптер системы отопления")
+      Container(lighting, "Lighting API", "", "Адаптер системы управления освещением")
+      Container(video, "Video API", "", "Адаптер системы видеонаблюдения")
+      Container(gates, "Gates API", "", "Адаптер системы управления дверьми")
+      Container(others, "Others API", "", "И другие еще не известные")
+    }
 
-    Container(devises, "Device Management Service", "Управление устройствами", "Регистрация новых устройств.\nХранение метаданных.\nУправление состоянием.")
-    Container(devises_db, "Device Management Database","PostgreSQL")
+    Boundary(a,""){
+      Container(devises, "Device Management Service", "Управление устройствами", "Регистрация новых устройств.\nХранение метаданных устройств.\nСоздать сценарий или триггер.")
+      Container(devises_db, "Device Management Database","PostgreSQL")
+    }
+     
+    Boundary(b,""){
+      Container(telemetry, "Телеметрия устройств", "Сбор данных с датчиков и хранение.\nВизуализация (графики, уведомления).")
+      Container(telemetry_db, "База данных телеметрии", "SQL/Timeseries")
+    }
 
-    Container(telemetry, "Телеметрия устройств", "Сбор данных с датчиков и хранение.\nВизуализация (графики, уведомления).")
-    Container(telemetry_db, "База данных телеметрии", "InfluxDB")
-    
-    Container(automation, "Automation Service", "Сервис автоматизации","Создание сценариев и тригеров. При их активации запускает события")
-    Container(automation_db, "Automation Database","PostgreSQL")
-
-    Container(devise_gateway, "Device Gateway", "Единая точка входа для взаимодействия с физическими устройствами")
+    Container(devise_gateway, "Device Gateway", "Единая точка входа для взаимодействия с физическими устройствами", "Работа с различными протоколами или облаками устройств")
 }
 
 System_Ext(temperature_iot, "Устройства отопления","")
 System_Ext(video_iot, "Устройства видео наблюдения","")
 System_Ext(lighting_iot, "Устройства освещения","")
 System_Ext(automatic_gates_iot, "Автоматические ворота","")
+System_Ext(other_iot, "И другие устройства...","")
 
 ' Связи
 
 Rel(user, gateway, "Получает телеметрию и управляет устройствами")
 
+Rel(gateway, iot_adapters_group, "Прямой запрос пользователя или команда", "JSON/HTTPS")
+Rel(devises, iot_adapters_group, "Команда сценария")
+
 Rel(gateway, devises, "")
-Rel(gateway, automation, "")
-Rel(gateway, temperature, "")
-Rel(gateway, telemetry, "")
+Rel(gateway, telemetry, "Получить аггрегированые или исторические значения")
 
-Rel(telemetry, temperature, "Получение новых данных с устройств")
-Rel(devises, devises_db, "Read/write")
-Rel(automation, automation_db, "Read/write")
-Rel(telemetry, telemetry_db, "Read/write")
-Rel(temperature, devise_gateway, "")
+Rel(devises, devises_db, "Read/Write")
+Rel(telemetry, telemetry_db, "Read/Write")
 
+Rel_R(iot_adapters_group, telemetry, "Отправка (Push) телеметрии")
+Rel_L(iot_adapters_group, devises, "Отправка (Push) телеметрии")
+Rel_D(iot_adapters_group, devise_gateway, "")
 
 Rel(devise_gateway, temperature_iot, "")
 Rel(devise_gateway, video_iot, "")
 Rel(devise_gateway, lighting_iot, "")
+Rel(devise_gateway, other_iot, "")
 Rel(devise_gateway, automatic_gates_iot, "")
+
+Lay_L(a, b)
+Lay_D(a, iot_adapters_group)
+Lay_D(b, iot_adapters_group)
+Lay_D(iot_adapters_group, devise_gateway)
+Lay_U(iot_adapters_group, gateway)
 
 @enduml
