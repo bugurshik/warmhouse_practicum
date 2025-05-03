@@ -4,9 +4,9 @@
         "contact": {}
     },
     "paths": {
-        "/example": {
+        "/temperature": {
             "get": {
-                "description": "Получить температуру по локации.",
+                "description": "Возвращает температурные данные для указанного датчика, включая местоположение, значение, единицы измерения и временную метку",
                 "consumes": [
                     "application/json"
                 ],
@@ -16,11 +16,11 @@
                 "tags": [
                     "Temperature"
                 ],
-                "summary": "GetTemperatureByLocation",
+                "summary": "Получить данные температуры по локации датчика",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Локация",
+                        "description": "Локация датчика",
                         "name": "location",
                         "in": "query",
                         "required": true
@@ -28,9 +28,98 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Возвращает текущие показания сенсора",
+                        "description": "Успешный ответ\" Example({\"location\": \"Комната 5\", \"value\": 23.5, \"unit\": \"C\", \"status\": \"normal\", \"timestamp\": \"2023-05-15T14:30:00Z\", \"description\": \"Текущая температура в помещении\"})",
                         "schema": {
-                            "type": "string"
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный запрос\" Example({\"error\": \"Location is required\"})",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Датчик не найден",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера\" Example({\"error\": \"Failed to fetch temperature data: connection timeout\"})",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/temperature/{sensorId}": {
+            "get": {
+                "description": "Возвращает температурные данные для указанного датчика, включая местоположение, значение, единицы измерения и временную метку",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Temperature"
+                ],
+                "summary": "Получить данные температуры по ID датчика",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "dht22-room5",
+                        "description": "Уникальный идентификатор датчика температуры",
+                        "name": "sensorId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ\" Example({\"location\": \"Комната 5\", \"value\": 23.5, \"unit\": \"C\", \"status\": \"normal\", \"timestamp\": \"2023-05-15T14:30:00Z\", \"description\": \"Текущая температура в помещении\"})",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный запрос\" Example({\"error\": \"Location is required\"})",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Датчик не найден",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка сервера\" Example({\"error\": \"Failed to fetch temperature data: connection timeout\"})",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
                         }
                     }
                 }

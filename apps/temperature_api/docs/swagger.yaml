@@ -1,13 +1,14 @@
 info:
   contact: {}
 paths:
-  /example:
+  /temperature:
     get:
       consumes:
       - application/json
-      description: Получить температуру по локации.
+      description: Возвращает температурные данные для указанного датчика, включая
+        местоположение, значение, единицы измерения и временную метку
       parameters:
-      - description: Локация
+      - description: Локация датчика
         in: query
         name: location
         required: true
@@ -16,10 +17,77 @@ paths:
       - application/json
       responses:
         "200":
-          description: Возвращает текущие показания сенсора
+          description: 'Успешный ответ" Example({"location": "Комната 5", "value":
+            23.5, "unit": "C", "status": "normal", "timestamp": "2023-05-15T14:30:00Z",
+            "description": "Текущая температура в помещении"})'
           schema:
-            type: string
-      summary: GetTemperatureByLocation
+            additionalProperties: true
+            type: object
+        "400":
+          description: 'Неверный запрос" Example({"error": "Location is required"})'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Датчик не найден
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: 'Ошибка сервера" Example({"error": "Failed to fetch temperature
+            data: connection timeout"})'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Получить данные температуры по локации датчика
+      tags:
+      - Temperature
+  /temperature/{sensorId}:
+    get:
+      consumes:
+      - application/json
+      description: Возвращает температурные данные для указанного датчика, включая
+        местоположение, значение, единицы измерения и временную метку
+      parameters:
+      - description: Уникальный идентификатор датчика температуры
+        example: dht22-room5
+        in: path
+        name: sensorId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'Успешный ответ" Example({"location": "Комната 5", "value":
+            23.5, "unit": "C", "status": "normal", "timestamp": "2023-05-15T14:30:00Z",
+            "description": "Текущая температура в помещении"})'
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: 'Неверный запрос" Example({"error": "Location is required"})'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Датчик не найден
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: 'Ошибка сервера" Example({"error": "Failed to fetch temperature
+            data: connection timeout"})'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Получить данные температуры по ID датчика
       tags:
       - Temperature
 swagger: "2.0"

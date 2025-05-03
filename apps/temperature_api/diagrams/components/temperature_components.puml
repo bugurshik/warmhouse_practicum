@@ -1,0 +1,32 @@
+@startuml Temperature - components diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Temperature API - компоненты
+
+Person(user, "Пользователь", "(WEB/Mobile/App)")
+Container(gateway, "API Gateway")
+
+Container(manage, "Temperature API") {
+    Component(handlers, "HTTP Handlers", "REST", "Приём входящих HTTP-запросов")
+    Component(temperature_service, "Temperature Service", "","Сервис управления устройствами системы отопления")
+    Component(mqtt_handler, "AMQP Handler", "Обработка команд брокера сообщений")
+}
+
+System(device_gateway, "Device Gateway", "")
+System(device_manager, "Dvice Management Service", "Управление устройствами")
+System(telemetry, "Telemetry Service")
+
+' Связи
+
+Rel(user, gateway, "")
+
+Rel(gateway, handlers, "Получение телеметрии в реальном времени, переключение устройств, команды", "JSON/HTTPS")
+Rel(handlers, temperature_service, "")
+Rel(mqtt_handler, temperature_service, "")
+Rel(telemetry, mqtt_handler,  "Запрос телеметрии", "AMQP")
+
+Rel(temperature_service, device_gateway, "")
+Rel(mqtt_handler, telemetry, "Отправка телеметрии", "AMQP")
+Rel(device_manager, mqtt_handler, "Команды устройствам", "AMQP")
+
+@enduml
