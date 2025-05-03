@@ -1,0 +1,49 @@
+@startuml Device Management - components diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Device Management Service - компоненты
+
+Person(user, "Пользователь", "(WEB/Mobile/App)")
+Container(gateway, "API Gateway")
+
+Boundary(bound, "API Адаптеры к умным устройствам", "логическая группа API"){
+    System(temperature, "Temperature API", "Система отопления")
+    System(lighting, "Lighting API", "Система управления освещением")
+    System(video, "Video API", "Система видеонаблюдения стриминг")
+    System(gates, "Gates API", "Система управления дверьми")
+    System(others, "Others API", "И другие еще не известные")
+}
+
+Container(manage, "Device Management Service") {
+    Component(handlers, "HTTP Handlers", "REST", "Приём входящих HTTP-запросов")
+    Component(manage_service, "Device Manager service", "Сервис управления устройствами")
+    Component(automation_service, "Automation service", "Сервис управления сценариями")
+    
+    Component(db_component, "Database component", "Репозиторий устройств")
+    Component(automotion_db_component, "Automotion Database component", "Репозиторий сценариев")
+    
+    Component(mqtt_handler, "AMQP Handler", "Подписка на топики устройств")
+}
+
+ContainerDb(manage_db, "База данных устройств", "PostgreSQL")
+
+' Связи
+
+Rel(user, gateway, "")
+
+Rel(gateway, handlers, "Добавление/удаление устройств, переключение устройств", "JSON/HTTPS")
+Rel(handlers, manage_service, "")
+Rel(manage_service, db_component, "")
+
+Rel(manage_service, bound,  "Команды устройствавм, обновления устройств", "AMQP",)
+
+Rel(mqtt_handler, automation_service,  "Проверить соответствие на сценарий", "",)
+
+Rel(bound, mqtt_handler,  "обновленная телеметрия", "AMQP",)
+Rel(automation_service, automotion_db_component,  "Получить сценарий", "Read",)
+Rel(automation_service, manage_service,  "Вызвать команду", "Read",)
+
+Rel(db_component, manage_db, "Read/Write")
+Rel(automotion_db_component, manage_db, "Read/Write")
+
+@enduml
