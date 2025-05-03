@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"device_management/handlers"
 	"log"
 	"net/http"
 	"os"
@@ -9,38 +10,44 @@ import (
 	"syscall"
 	"time"
 
-	"temperature/handlers"
-	"temperature/services"
+	"device_management/db"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+
+	// Set up database connection
+	dbURL := getEnv("DATABASE_URL", "postgres://postgres:postgres@localhost:5432/smarthome")
+	database, err := db.New(dbURL)
+	if err != nil {
+		log.Fatalf("Unable to connect to database: %v\n", err)
+	}
+	defer database.Close()
+
 	// Initialize router
 	router := gin.Default()
 
 	// Health check endpoint
 	router.GET("/health", func(c *gin.Context) {
+		log.Print("devices run")
 		c.JSON(http.StatusOK, gin.H{
 			"status": "ok",
 		})
 	})
 
 	// API routes
-	apiRoutes := router.Group("")
-
-	temperatureService := services.NewTemperatureService()
+	apiRoutes := router.Group("/")
 
 	// Register sensor routes
-	temperatureHandler := handlers.NewTemperatureHandler(temperatureService)
-	temperatureHandler.RegisterRoutes(apiRoutes)
+	sensorHandler := handlers.NewSensorHandler(database)
+	sensorHandler.RegisterRoutes(apiRoutes)
 
 	// Start server
 	srv := &http.Server{
-		Addr:    getEnv("PORT", ":8081"),
+		Addr:    getEnv("PORT", ":8084"),
 		Handler: router,
 	}
-
 	// Start the server in a goroutine
 	go func() {
 		log.Printf("Server starting on %s\n", srv.Addr)

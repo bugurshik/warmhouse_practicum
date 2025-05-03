@@ -1,0 +1,490 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Device Manager API",
+    "description": "API для управления устройстввами, созданием сценариев и обновлением устройств",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Devices",
+      "description": "Операции с умными устройсвами"
+    },
+    {
+      "name": "Scenarios",
+      "description": "Управление сценариями и триггерами"
+    },
+    {
+      "name": "Firmware",
+      "description": "Обновление прошивки устройств"
+    }
+  ],
+  "paths": {
+    "/devices": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Get all devices",
+        "description": "Returns a list of all registered smart devices",
+        "responses": {
+          "200": {
+            "description": "A list of devices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Device"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Create a new device",
+        "description": "Register a new smart device in the system",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Device created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/devices/{deviceId}": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Get device by ID",
+        "description": "Returns a single device",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "deviceId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of the device to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Update device",
+        "description": "Update an existing device",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "deviceId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of the device to update"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Device updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Delete device",
+        "description": "Remove a device from the system",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "deviceId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of the device to delete"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Device deleted successfully"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      }
+    },
+    "/scenarios": {
+      "post": {
+        "tags": [
+          "Scenarios"
+        ],
+        "summary": "Создать новый сценарий",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScenarioCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Scenario created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scenario"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/scenarios/{scenarioId}": {
+      "get": {
+        "tags": [
+          "Scenarios"
+        ],
+        "summary": "Получить сценарий по Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scenarioId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of the device to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scenario"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Scenario not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Scenarios"
+        ],
+        "summary": "Обновить сценарий",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scenarioId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScenarioCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scenario updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scenario"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Scenarios"
+        ],
+        "summary": "Удаление сценария",
+        "description": "Удаление сценария по Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "scenarioId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Scenario deleted successfully"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      }
+    },
+    "/firmware/{deviceId}": {
+      "post": {
+        "tags": [
+          "Firmware"
+        ],
+        "summary": "Update firmware",
+        "description": "Initiate firmware update for a device",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "deviceId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID of the device to update"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FirmwareUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Firmware update initiated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Device": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "d-123456789"
+          },
+          "name": {
+            "type": "string",
+            "example": "Living Room Light"
+          },
+          "type": {
+            "type": "string",
+            "example": "light"
+          },
+          "status": {
+            "type": "string",
+            "example": "online"
+          },
+          "firmwareVersion": {
+            "type": "string",
+            "example": "1.2.3"
+          },
+          "lastSeen": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DeviceCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Kitchen Thermostat"
+          },
+          "type": {
+            "type": "string",
+            "example": "thermostat"
+          },
+          "initialConfig": {
+            "type": "object"
+          }
+        }
+      },
+      "DeviceUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Updated Device Name"
+          },
+          "configuration": {
+            "type": "object"
+          }
+        }
+      },
+      "Scenario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "trigger": {
+            "type": "object"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ScenarioCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "trigger",
+          "actions"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "trigger": {
+            "type": "object"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "FirmwareUpdate": {
+        "type": "object",
+        "required": [
+          "version",
+          "url"
+        ],
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "force": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    }
+  }
+}

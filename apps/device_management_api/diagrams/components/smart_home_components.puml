@@ -1,0 +1,29 @@
+@startuml Управление устройствами - component Diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Device management - Компоненты
+
+Person(user, "Пользователь", "Пользователь")
+Container(gateway, "API Gateway")
+
+Container(api, ""){
+    Component(devices, "Devices service", "Управление устройствами", "")
+    Component(automation, "Automation", "Управление сценариями и триггерами", "")
+    Component(dbService, "Database Service", "")
+    Component(handlers, "HTTP Handlers", "")
+}
+
+System(postgres, "PostgreSQL", "База данных датчиков")
+' Связи
+
+Rel(user, gateway, "", "")
+Rel(gateway, handlers, "", "")
+
+Rel(handlers, automation, "", "")
+Rel(automation, dbService, "", "")
+
+Rel(handlers, devices, "", "")
+Rel(devices, dbService, "", "")
+Rel(dbService, postgres, "CRUD запросы", "Read/Write")
+
+@enduml
