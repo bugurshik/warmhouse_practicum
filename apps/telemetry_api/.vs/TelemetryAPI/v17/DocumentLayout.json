@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|c:\\users\\sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\telemetryapi\\consumers\\sensorupdatedconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|solutionrelative:telemetryapi\\consumers\\sensorupdatedconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|c:\\users\\sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\telemetryapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|solutionrelative:telemetryapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|c:\\users\\sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\telemetryapi\\sensorupdated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|solutionrelative:telemetryapi\\sensorupdated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|c:\\users\\sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\telemetryapi\\telemetryconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A74AD4C-8AF2-4F7A-9AAD-E49173F9D573}|TelemetryAPI\\TelemetryAPI.csproj|solutionrelative:telemetryapi\\telemetryconsumer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,40 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TelemetryConsumer.cs",
-              "DocumentMoniker": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\TelemetryConsumer.cs",
-              "RelativeDocumentMoniker": "TelemetryAPI\\TelemetryConsumer.cs",
-              "ToolTip": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\TelemetryConsumer.cs",
-              "RelativeToolTip": "TelemetryAPI\\TelemetryConsumer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "SensorUpdatedConsumer.cs",
+              "DocumentMoniker": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\Consumers\\SensorUpdatedConsumer.cs",
+              "RelativeDocumentMoniker": "TelemetryAPI\\Consumers\\SensorUpdatedConsumer.cs",
+              "ToolTip": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\Consumers\\SensorUpdatedConsumer.cs",
+              "RelativeToolTip": "TelemetryAPI\\Consumers\\SensorUpdatedConsumer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T22:10:31.402Z"
+              "WhenOpened": "2025-05-03T00:25:41.714Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SensorUpdated.cs",
-              "DocumentMoniker": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\SensorUpdated.cs",
-              "RelativeDocumentMoniker": "TelemetryAPI\\SensorUpdated.cs",
-              "ToolTip": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\SensorUpdated.cs",
-              "RelativeToolTip": "TelemetryAPI\\SensorUpdated.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T22:10:30.528Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\Program.cs",
               "RelativeDocumentMoniker": "TelemetryAPI\\Program.cs",
               "ToolTip": "C:\\Users\\Sergo\\source\\repos\\architecture-pro-warmhouse\\apps\\telemetry_api\\TelemetryAPI\\Program.cs",
               "RelativeToolTip": "TelemetryAPI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABsAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T21:04:14.629Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-01T21:04:14.629Z"
             }
           ]
         }

@@ -1,0 +1,39 @@
+@startuml Telemetry - components diagram
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Telemetry API - компоненты
+
+Person(user, "Пользователь", "(WEB/Mobile/App)")
+Container(gateway, "API Gateway")
+
+Container(manage, "Telemetry API") {
+    Component(handlers, "HTTP Handlers", "REST", "Приём входящих HTTP-запросов")
+    Component(telemetry_service, "Telemetry service", "","")
+    Component(mqtt_handler, "AMQP Handlers", "Обработка команд брокера сообщений")
+    Component(telemetry_repo, "TelemetryStorage", "Репозиторий телеметрии","")
+}
+
+System(telemetry_db, "Telemetry DB", "")
+
+Boundary(bound,"логическая группа"){
+    System(temperature, "Temperature API", "")
+    System(light, "Lighting API", "")
+    System(gates, "Gates API", "")
+    System(others, "And Others", "")
+}
+
+' Связи
+
+Rel(user, gateway, "")
+
+Rel(gateway, handlers, "Получение исторических данных датчиков", "JSON/HTTPS")
+Rel(handlers, telemetry_service, "")
+Rel(mqtt_handler, telemetry_service, "Сохранить телеметрию")
+
+Rel(telemetry_service, telemetry_repo, "")
+
+Rel(telemetry_repo, telemetry_db, "Reads/Writes", "SQL")
+
+Rel(bound, mqtt_handler, "Новые данные Телеметрии", "AMQP")
+
+@enduml
