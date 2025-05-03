@@ -60,23 +60,23 @@ Bounded Contexts:
 
 **Диаграмма контейнеров (Containers)**
 
-[Тёплый дом - контейнеры](./TO_BE_microservice_containers.png)
+![Тёплый дом - контейнеры](./TO_BE_microservice_containers.png)
 
 **Диаграмма компонентов (Components)**
 
-[Temperature API - компоненты](./temperature_components.png)
+![Temperature API - компоненты](./temperature_components.png)
 
 Добавьте диаграмму для каждого из выделенных микросервисов.
 
 **Диаграмма кода (Code)**
 
-[Temperature API - классы](./temperature_classes.png)
+![Temperature API - классы](./temperature_classes.png)
 
 # Задание 3. Разработка ER-диаграммы
 
 Добавьте сюда ER-диаграмму. Она должна отражать ключевые сущности системы, их атрибуты и тип связей между ними.
 
-[ER диаграмма](./ER_diagram.png)
+![ER диаграмма](./ER_diagram.png)
 
 # Задание 4. Создание и документирование API
 
