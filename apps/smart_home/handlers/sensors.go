@@ -16,15 +16,17 @@ import (
 
 // SensorHandler handles sensor-related requests
 type SensorHandler struct {
-	DB                 *db.DB
-	TemperatureService *services.TemperatureService
+	DB                     *db.DB
+	TemperatureService     *services.TemperatureService
+	SensorManagementClient *services.SensorManagementClient
 }
 
 // NewSensorHandler creates a new SensorHandler
-func NewSensorHandler(db *db.DB, temperatureService *services.TemperatureService) *SensorHandler {
+func NewSensorHandler(db *db.DB, temperatureService *services.TemperatureService, sensorManagementClient *services.SensorManagementClient) *SensorHandler {
 	return &SensorHandler{
-		DB:                 db,
-		TemperatureService: temperatureService,
+		DB:                     db,
+		TemperatureService:     temperatureService,
+		SensorManagementClient: sensorManagementClient,
 	}
 }
 
@@ -136,11 +138,17 @@ func (h *SensorHandler) CreateSensor(c *gin.Context) {
 		return
 	}
 
-	sensor, err := h.DB.CreateSensor(context.Background(), sensorCreate)
+	sensor, err := h.SensorManagementClient.CreateSensor(c, sensorCreate)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
+	// sensor, err := h.DB.CreateSensor(context.Background(), sensorCreate)
+	// if err != nil {
+	// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	// 	return
+	// }
 
 	c.JSON(http.StatusCreated, sensor)
 }
@@ -159,11 +167,17 @@ func (h *SensorHandler) UpdateSensor(c *gin.Context) {
 		return
 	}
 
-	sensor, err := h.DB.UpdateSensor(context.Background(), id, sensorUpdate)
+	sensor, err := h.SensorManagementClient.UpdateSensor(c, id, sensorUpdate)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
+	// sensor, err := h.DB.UpdateSensor(context.Background(), id, sensorUpdate)
+	// if err != nil {
+	// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	// 	return
+	// }
 
 	c.JSON(http.StatusOK, sensor)
 }
@@ -176,11 +190,17 @@ func (h *SensorHandler) DeleteSensor(c *gin.Context) {
 		return
 	}
 
-	err = h.DB.DeleteSensor(context.Background(), id)
+	err = h.SensorManagementClient.DeleteSensor(c, id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
+	// err = h.DB.DeleteSensor(context.Background(), id)
+	// if err != nil {
+	// 	c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	// 	return
+	// }
 
 	c.JSON(http.StatusOK, gin.H{"message": "Sensor deleted successfully"})
 }
