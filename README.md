@@ -52,7 +52,7 @@ Bounded Contexts:
 
 ### 5. Визуализация контекста системы — диаграмма С4
 
-[Тёплый дом - Контекст](./diagrams/contexts/AS_IS_context.png)
+![Тёплый дом - Контекст](./diagrams/contexts/AS_IS_context.png)
 
 # Задание 2. Проектирование микросервисной архитектуры
 
