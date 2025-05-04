@@ -16,9 +16,7 @@ Boundary(bound, "API Адаптеры к умным устройствам", "л
 Container(telemetry, "Телеметрия") {
     Component(handlers, "HTTP Handlers", "REST", "Приём входящих HTTP-запросов")
     Component(mqtt_handler, "AMQP Handler", "Подписка на топики устройств")
-
     Component(telemetry_service, "Telemetry service", "Сервис получения и агрегации данных")
-    
     Component(db_component, "Database component", "Репозиторий")
 }
 

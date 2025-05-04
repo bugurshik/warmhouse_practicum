@@ -60,11 +60,16 @@ Bounded Contexts:
 
 **Диаграмма контейнеров (Containers)**
 
-![Тёплый дом - контейнеры](./TO_BE_microservice_containers.png)
+![Тёплый дом - контейнеры](./diagrams/containers/TO_BE_containers.png)
 
 **Диаграмма компонентов (Components)**
 
-![Temperature API - компоненты](./temperature_components.png)
+![Temperature API - компоненты](./diagrams/components/temperature_components.png)
+
+![Device management API - компоненты](./diagrams/components/Device_management_components.png)
+
+![Telemetry API - компоненты](./diagrams/components/Telemetry_components.png)
+
 
 Добавьте диаграмму для каждого из выделенных микросервисов.
 
@@ -76,7 +81,7 @@ Bounded Contexts:
 
 Добавьте сюда ER-диаграмму. Она должна отражать ключевые сущности системы, их атрибуты и тип связей между ними.
 
-![ER диаграмма](./ER_diagram.png)
+![ER диаграмма](./diagrams/ER_diagram.png)
 
 # Задание 4. Создание и документирование API
 
@@ -92,9 +97,9 @@ Bounded Contexts:
 
 Здесь приложите ссылки на документацию API для микросервисов, которые вы спроектировали в первой части проектной работы. Для документирования используйте Swagger/OpenAPI или AsyncAPI.
 
-[Swagger Temperature API](./temperature_api/docs/swagger.json)
-[Swagger Telemetry API](./telemetry_api/docs/swagger.json)
-[Swagger Device manager API](./device_management_api/docs/swagger.json)
+![Swagger Temperature API](./temperature_api/docs/swagger.json)
+![Swagger Telemetry API](./telemetry_api/docs/swagger.json)
+![Swagger Device manager API](./device_management_api/docs/swagger.json)
 
 # Задание 5. Работа с docker и docker-compose
 
@@ -169,7 +174,7 @@ Locations - название комнаты, sensorId - идентификато
 язык c# 
 Сделал интеграцию для TemperatureAPI по AMQT (получаю телеметрию через брокера сообщений)
 Сделал ручку для получения историчеких данных сенсора
-TelemetryAPI переодически опрашивает не очень оптимизированный GetSensors из монолита. По изначальной моей задумке TelemetryAPI не должен инициировать сбор данных, а только принимать. Для этого нужно создать еще один сервис-сборщик либо добавить PUSH логику в Temperature API, но считаю что это выходит за замки задания
+TelemetryAPI переодически опрашивает не очень оптимизированный GetSensors из монолита. По моей изначальной задумке TelemetryAPI не должен инициировать сбор данных, а только принимать. Для этого нужно создать еще один сервис-сборщик либо добавить PUSH логику в Temperature API, но считаю что это выходит за замки задания
 
 **Temperature API**
 язык go 
