@@ -75,7 +75,7 @@ Bounded Contexts:
 
 **Диаграмма кода (Code)**
 
-![Temperature API - классы](./temperature_classes.png)
+![Temperature API - классы](./diagrams/classes/temperature_classes.png)
 
 # Задание 3. Разработка ER-диаграммы
 
@@ -97,9 +97,9 @@ Bounded Contexts:
 
 Здесь приложите ссылки на документацию API для микросервисов, которые вы спроектировали в первой части проектной работы. Для документирования используйте Swagger/OpenAPI или AsyncAPI.
 
-![Swagger Temperature API](./temperature_api/docs/swagger.json)
-![Swagger Telemetry API](./telemetry_api/docs/swagger.json)
-![Swagger Device manager API](./device_management_api/docs/swagger.json)
+[Swagger Temperature API](./temperature_api/docs/swagger.json)
+[Swagger Telemetry API](./telemetry_api/docs/swagger.json)
+[Swagger Device manager API](./device_management_api/docs/swagger.json)
 
 # Задание 5. Работа с docker и docker-compose
 
