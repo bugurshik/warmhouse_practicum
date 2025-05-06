@@ -17,4 +17,6 @@ class TemperatureService {
 	+Temperature GetTemperatureByID()  
 }
 
+TemperatureService --> Temperature
+
 @enduml

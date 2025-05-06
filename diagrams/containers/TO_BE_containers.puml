@@ -1,13 +1,10 @@
 @startuml Теплый дом - Container
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+AddRelTag("asyncLine", $lineStyle=DashedLine())
 
 title Теплый дом - Контейнеры
-skinparam Arrow  {
-  FontColor #ffffff
-}
-
 Person(user, "Пользователь", "(WEB/Mobile/App)")
-System(api_system, "Теплый дом") {
+Boundary(api_system, "Теплый дом") {
     Container(gateway, "API Gateway", "Единая точка входа для всех API.\nМаршрутизация запросов к нужным сервисам.\nЛимиты запросов, кеширование.")
     
     Boundary(iot_adapters_group, "API Адаптеры к умным устройствам", "Логическая группа API"){
@@ -50,15 +47,15 @@ Rel(gateway, telemetry, "Получить аггрегированые или и
 Rel(devises, devises_db, "Read/Write")
 Rel(telemetry, telemetry_db, "Read/Write")
 
-Rel_R(iot_adapters_group, telemetry, "Отправка (Push) телеметрии")
-Rel_L(iot_adapters_group, devises, "Отправка (Push) телеметрии")
+Rel_R(iot_adapters_group, telemetry, "Отправка (Push) телеметрии", $tags="asyncLine")
+Rel_L(iot_adapters_group, devises, "Отправка (Push) телеметрии", $tags="asyncLine")
 Rel_D(iot_adapters_group, devise_gateway, "")
 
-Rel(devise_gateway, temperature_iot, "")
-Rel(devise_gateway, video_iot, "")
-Rel(devise_gateway, lighting_iot, "")
-Rel(devise_gateway, other_iot, "")
-Rel(devise_gateway, automatic_gates_iot, "")
+Rel(devise_gateway, temperature_iot, "", $tags="asyncLine")
+Rel(devise_gateway, video_iot, "", $tags="asyncLine")
+Rel(devise_gateway, lighting_iot, "", $tags="asyncLine")
+Rel(devise_gateway, other_iot, "", $tags="asyncLine")
+Rel(devise_gateway, automatic_gates_iot, "", $tags="asyncLine")
 
 Lay_L(a, b)
 Lay_D(a, iot_adapters_group)
